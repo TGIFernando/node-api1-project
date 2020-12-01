@@ -3,10 +3,12 @@
 const express = require("express")
 const shortid = require("shortid")
 const server = express()
+const cors = require("cors")
 
 //counfigure server to use json
 
 server.use(express.json())
+server.use(cors())
 
 //DummyData of users
 let userData = [
@@ -65,7 +67,7 @@ server.get('/api/users', (req, res) => {
 server.post('/api/users', (req, res) => {
     const newUser = req.body
     if (!newUser.name || !newUser.bio){
-        res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
+        res.status(500).json({ errorMessage: "Please provide name and bio for the user." })
     }else{
         const newlyCreatedUser = User.createNew(newUser)
         res.status(201).json(newlyCreatedUser)
