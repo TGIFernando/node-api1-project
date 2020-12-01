@@ -22,6 +22,11 @@ let userData = [
         name: "Morgan Eccles",
         bio: "I really like playing animal crossing uwu ",
     },
+    {
+        id: shortid.generate(),
+        name: 'Bento',
+        bio: 'I like jumping on my parents computer!'
+    },
 ]
 //Helper functions
 const User = {

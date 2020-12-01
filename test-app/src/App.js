@@ -27,7 +27,6 @@ function App() {
     axios.get('http://localhost:5000/api/users')
       .then(res => {
         setUsers(res.data)
-        console.log(res.data)
       }).catch(err => {
         console.log("Y IS THERE AN ERROR: ", err)
       })

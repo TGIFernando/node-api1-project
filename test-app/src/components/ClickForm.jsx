@@ -11,14 +11,12 @@ const ClickForm = (props) => {
 
     const onChange = e => {
         setFormValues({...formValues, [e.target.name]: e.target.value})
-        console.log(formValues)
     }
 
     const onSubmit = e => {
         e.preventDefault()
         axios.put(`http://localhost:5000/api/users/${id}`, formValues)
             .then(res => {
-                console.log(res)
                 props.setClicked(false)
             }).catch(err => {
                 console.log("ERROR: ", err)
@@ -30,12 +28,20 @@ const ClickForm = (props) => {
         e.preventDefault()
         axios.delete(`http://localhost:5000/api/users/${id}`)
             .then(res => {
-                console.log(res)
                 props.setClicked(false)
             }).catch(err => {
                 console.log("ERROR: ", err)
                 props.setClicked(false)
             })
+    }
+
+    const onCancel = e => {
+        e.preventDefault()
+        if(props.clicked){
+            props.setClicked(false)
+        } else {
+            props.setClicked(false)
+        }
     }
 
     
@@ -46,6 +52,7 @@ const ClickForm = (props) => {
                 <input value={formValues.bio} onChange={onChange} type='text' name='bio' placeholder='Bio'/>
                 <button>Submit</button>
                 <button onClick={onDelete}>Delete</button>
+                <button onClick={onCancel}>Cancel</button>
             </form>
         </div>
     )

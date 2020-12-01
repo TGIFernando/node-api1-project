@@ -23,13 +23,12 @@ const Card = (props) => {
     
     const onClick = () => {
         props.setClicked(true)
-        console.log("Clicked: ", props.clicked)
     }
     return(
-        <Div onClick={onClick}>
-            <Name>{props.name}</Name>
-            <Bio>Bio: {props.bio}</Bio>
-            {props.clicked ? <ClickForm setClicked={props.setClicked} name={props.name} bio={props.bio} id={props.id}/> : <></>}
+        <Div>
+            <Name onClick={onClick}>{props.name}</Name>
+            <Bio onClick={onClick}>Bio: {props.bio}</Bio>
+            {props.clicked ? <ClickForm clicked={props.clicked} setClicked={props.setClicked} name={props.name} bio={props.bio} id={props.id}/> : <></>}
         </Div>
     )
 }

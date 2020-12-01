@@ -46,7 +46,6 @@ const Form = (props) => {
         e.preventDefault()
         axios.post('http://localhost:5000/api/users/', formValues)
             .then(res => {
-                console.log(res)
                 props.setAddUser(false)
             }).catch(err => {
                 console.log("ERROR: ", err)
@@ -55,7 +54,6 @@ const Form = (props) => {
 
     const onChange = e => {
         setFormValues({...formValues, [e.target.name]: e.target.value})
-        console.log(formValues)
     }
 
     return(
