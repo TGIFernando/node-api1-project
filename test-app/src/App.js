@@ -18,13 +18,19 @@ width: 10rem;
 margin-top: 1rem;
 `
 
+function url(path){
+  return process.env.NODE_ENV === 'development'
+    ? `http://localhost:5000${path}`
+    : path
+}
+
 function App() {
   const [users, setUsers] = useState([])
   const [addUser, setAddUser] = useState(false)
   const [clicked, setClicked] = useState(false)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/users')
+    axios.get(url('/api/users'))
       .then(res => {
         setUsers(res.data)
       }).catch(err => {

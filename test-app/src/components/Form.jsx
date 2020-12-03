@@ -34,6 +34,12 @@ width: 10rem;
 margin: .5rem 0;
 `
 
+function url(path){
+    return process.env.NODE_ENV === 'development'
+      ? `http://localhost:5000${path}`
+      : path
+}
+
 const Form = (props) => {
     const [formValues, setFormValues] = useState(initailValues)
 
@@ -44,7 +50,7 @@ const Form = (props) => {
 
     const onSubmit = e => {
         e.preventDefault()
-        axios.post('http://localhost:5000/api/users/', formValues)
+        axios.post(url('/api/users/'), formValues)
             .then(res => {
                 props.setAddUser(false)
             }).catch(err => {

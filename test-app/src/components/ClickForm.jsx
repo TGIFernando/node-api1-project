@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+function url(path){
+    return process.env.NODE_ENV === 'development'
+      ? `http://localhost:5000${path}`
+      : path
+  }
+
 const ClickForm = (props) => {
     const initailValues = {
         name: props.name,
@@ -15,7 +21,7 @@ const ClickForm = (props) => {
 
     const onSubmit = e => {
         e.preventDefault()
-        axios.put(`http://localhost:5000/api/users/${id}`, formValues)
+        axios.put(url(`/api/users/${id}`), formValues)
             .then(res => {
                 props.setClicked(false)
             }).catch(err => {
@@ -26,7 +32,7 @@ const ClickForm = (props) => {
 
     const onDelete = e => {
         e.preventDefault()
-        axios.delete(`http://localhost:5000/api/users/${id}`)
+        axios.delete(url(`/api/users/${id}`))
             .then(res => {
                 props.setClicked(false)
             }).catch(err => {

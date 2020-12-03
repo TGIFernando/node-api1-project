@@ -1,14 +1,20 @@
+//this is for connecting to the enviorment and heroku
+require('dotenv').config()
 //Imports
-
 const express = require("express")
 const shortid = require("shortid")
+
 const server = express()
 const cors = require("cors")
+const path = require("path")
+
+const port = process.env.PORT || 4000
 
 //counfigure server to use json
 
-server.use(express.json())
 server.use(cors())
+server.use(express.json())
+server.use(express.static(path.join(__dirname, 'test-app/build')))
 
 //DummyData of users
 let userData = [
@@ -111,11 +117,11 @@ server.put('/api/users/:id', (req, res) => {
 })
 
 //catch all endpoint
-server.use("*", (req, res) => {
-    res.status(404).json({ message: "not found" })
+server.use("*", (_, res) => {
+    res.sendFile(path.join(__dirname, 'test-app/build', 'index.html'))
 })
 
 //starting the server
-server.listen(5000, () => {
-    console.log("listening on port 5000")
+server.listen(port, () => {
+    console.log(`listening on port ${port}`)
 })
